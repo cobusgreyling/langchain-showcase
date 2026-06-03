@@ -1,0 +1,30 @@
+# Core LangChain + Graph (required for all tutorials)
+langchain>=0.3.0
+langchain-core>=0.3.0
+langgraph>=0.2.0
+
+# LLM providers (install what you need)
+langchain-openai>=0.2.0
+# langchain-anthropic>=0.2.0
+# langchain-google-genai>=2.0.0
+# langchain-ollama>=0.2.0
+
+# Structured data & validation
+pydantic>=2.0.0
+
+# Environment & utilities
+python-dotenv>=1.0.0
+
+# RAG (Tutorial 05)
+langchain-text-splitters>=0.3.0
+langchain-chroma>=0.1.0
+chromadb>=0.5.0
+
+# Optional but recommended for evaluation & tracing (Tutorial 07+)
+# langsmith>=0.1.0
+
+# For nice console output in tutorials
+rich>=13.0.0
+
+# Dev / testing (optional)
+# pytest>=8.0.0
