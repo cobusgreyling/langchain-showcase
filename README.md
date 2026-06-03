@@ -1,7 +1,7 @@
 # LangChain Agent & Harness Engineering Showcase
 
 <p align="center">
-  <img src="assets/header.jpg" width="100%" alt="LangChain Agent & Harness Engineering Showcase Header">
+  <img src="assets/2026-06-03_21-11-47.jpg" width="100%" alt="LangChain Agent & Harness Engineering Showcase Header">
 </p>
 
 > **10 progressive, production-minded tutorials** for developers who want to move beyond toy demos and learn how to **engineer reliable AI agent systems**.
