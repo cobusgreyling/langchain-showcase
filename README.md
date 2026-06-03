@@ -68,25 +68,26 @@ Each tutorial is self-documenting. Read the comments and the per-tutorial notes.
 
 > **Live hosted showcase:** [https://cobusgreyling.github.io/langchain-showcase/](https://cobusgreyling.github.io/langchain-showcase/)
 
-**If you see a 404**, you need to enable GitHub Pages (one-time setup):
+**If you see a 404**, enable GitHub Pages (one-time, very simple):
 
-### How to enable the live site (exact steps)
+### How to enable the live showcase page
 
-1. Go to your repo → **Settings** → **Pages** (direct link: https://github.com/cobusgreyling/langchain-showcase/settings/pages)
-2. Under **"Build and deployment"**, find **Source**.
-3. Change it from "None" (or whatever it says) to **GitHub Actions**.
-4. Save the change.
-5. GitHub will automatically run the deployment workflow we added (see the green checkmarks in the **Actions** tab).
-6. Wait 1–2 minutes and refresh the URL above.
+1. Go to **Settings → Pages** in the repo (or visit https://github.com/cobusgreyling/langchain-showcase/settings/pages)
+2. Under "Build and deployment" → **Source**, select **"Deploy from a branch"**
+3. Branch: `gh-pages`
+4. Folder: `/ (root)`
+5. Click **Save**
 
-Once enabled, every push to `main` will automatically update the live site.
+The site will be live within ~1 minute at the URL above. No Actions needed.
 
-Local alternative (works immediately after cloning):  
+We also have a `gh-pages` branch that contains exactly the showcase files (index.html + assets).
+
+Local alternative (works right after `git clone`):  
 [docs/index.html](docs/index.html) or [docs/showcase.html](docs/showcase.html)
 
 **Full visual overview, learning objectives, and key takeaways for every tutorial:**
 
-**[→ Open the live Showcase Page](https://cobusgreyling.github.io/langchain-showcase/)** (recommended once enabled)
+**[→ Open the live Showcase Page](https://cobusgreyling.github.io/langchain-showcase/)** (recommended)
 
 Local file: [docs/index.html](docs/index.html) (or [docs/showcase.html](docs/showcase.html))
 
