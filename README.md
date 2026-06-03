@@ -66,8 +66,15 @@ Each tutorial is self-documenting. Read the comments and the per-tutorial notes.
 | 09 | [Guardrails & Resilience Patterns](./tutorials/09-guardrails-resilience) | Input/output guards, retries     | Defensive engineering                | 35 min   |
 | 10 | [The Complete Production Harness](./tutorials/10-full-harness)           | Everything integrated            | Your reusable agent platform         | 45 min   |
 
-**Full visual overview, learning objectives, and key takeaways for every tutorial:**  
-→ **[OPEN THE SHOWCASE PAGE →](./SHOWCASE.md)**
+> **Beautiful visual version:** [Open the interactive Showcase Page →](docs/showcase.html) (best experience — works locally or on GitHub Pages)
+
+**Tip:** Enable GitHub Pages for this repo (Settings → Pages → Source: `/docs` on `main` branch) to get a live hosted version at `https://cobusgreyling.github.io/langchain-showcase/`.
+
+**Full visual overview, learning objectives, and key takeaways for every tutorial:**
+
+**[→ Open the beautiful visual Showcase Page (recommended)](docs/showcase.html)** — works great when opened locally or via GitHub Pages
+
+Also available as detailed Markdown: **[SHOWCASE.md](./SHOWCASE.md)**
 
 ---
 
@@ -95,7 +102,9 @@ Each tutorial is self-documenting. Read the comments and the per-tutorial notes.
 ```
 langchain-showcase/
 ├── README.md                 # You are here
-├── SHOWCASE.md               # Detailed tutorial gallery + learning map
+├── SHOWCASE.md               # Detailed tutorial gallery (Markdown)
+├── docs/
+│   └── showcase.html         # Beautiful interactive showcase page (recommended)
 ├── requirements.txt
 ├── .env.example
 ├── LICENSE                   # MIT — Cobus Greyling, 2026
