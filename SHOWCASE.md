@@ -6,7 +6,7 @@
 
 This page gives you the "why", the learning objectives, the specific harness engineering skills, difficulty, and a teaser for each tutorial. Use it as your map.
 
-> **Prefer a modern visual experience?** Open [docs/showcase.html](../docs/showcase.html) instead — a beautiful interactive version with filtering, search, and cards (works great when opened directly from the cloned repo or via GitHub Pages).
+> **Prefer a modern visual experience?** Open the live version at https://cobusgreyling.github.io/langchain-showcase/ (or locally `docs/index.html`). It has filtering, search, and nice cards.
 
 ---
 

@@ -66,13 +66,15 @@ Each tutorial is self-documenting. Read the comments and the per-tutorial notes.
 | 09 | [Guardrails & Resilience Patterns](./tutorials/09-guardrails-resilience) | Input/output guards, retries     | Defensive engineering                | 35 min   |
 | 10 | [The Complete Production Harness](./tutorials/10-full-harness)           | Everything integrated            | Your reusable agent platform         | 45 min   |
 
-> **Beautiful visual version:** [Open the interactive Showcase Page →](docs/showcase.html) (best experience — works locally or on GitHub Pages)
+> **Live hosted showcase:** [https://cobusgreyling.github.io/langchain-showcase/](https://cobusgreyling.github.io/langchain-showcase/) (enable Pages in repo settings if you see 404)
 
-**Tip:** Enable GitHub Pages for this repo (Settings → Pages → Source: `/docs` on `main` branch) to get a live hosted version at `https://cobusgreyling.github.io/langchain-showcase/`.
+Local alternative: [docs/index.html](docs/index.html) or [docs/showcase.html](docs/showcase.html)
 
 **Full visual overview, learning objectives, and key takeaways for every tutorial:**
 
-**[→ Open the beautiful visual Showcase Page (recommended)](docs/showcase.html)** — works great when opened locally or via GitHub Pages
+**[→ Open the live Showcase Page](https://cobusgreyling.github.io/langchain-showcase/)** (recommended)
+
+Local file: [docs/index.html](docs/index.html) (or [docs/showcase.html](docs/showcase.html))
 
 Also available as detailed Markdown: **[SHOWCASE.md](./SHOWCASE.md)**
 

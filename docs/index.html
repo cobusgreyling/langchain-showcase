@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LangChain Agent &amp; Harness Engineering Showcase • Cobus Greyling</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Space+Grotesk:wght@500;600&amp;display=swap');
+        
+        :root {
+            --primary: #6366f1;
+        }
+        
+        body {
+            font-family: 'Inter', system_ui, sans-serif;
+        }
+        
+        .font-display {
+            font-family: 'Space Grotesk', 'Inter', system_ui, sans-serif;
+            font-weight: 600;
+        }
+
+        .hero-bg {
+            background: linear-gradient(135deg, #1e2937 0%, #0f172a 100%);
+        }
+
+        .tutorial-card {
+            transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1), 
+                        box-shadow 0.2s cubic-bezier(0.4, 0.0, 0.2, 1),
+                        border-color 0.2s;
+        }
+        
+        .tutorial-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+        }
+
+        .section-header {
+            font-size: 1.75rem;
+            line-height: 1.1;
+            font-weight: 700;
+            letter-spacing: -0.025em;
+        }
+
+        .harness-pill {
+            font-size: 0.75rem;
+            padding-left: 0.65rem;
+            padding-right: 0.65rem;
+            padding-top: 0.1rem;
+            padding-bottom: 0.1rem;
+            font-weight: 600;
+        }
+
+        .nav-active {
+            color: #6366f1;
+            font-weight: 600;
+        }
+
+        .metric {
+            transition: all 0.3s ease;
+        }
+
+        .filter-btn {
+            transition: all 0.1s ease;
+        }
+
+        .filter-btn.active {
+            background-color: #6366f1;
+            color: white;
+            border-color: #6366f1;
+        }
+
+        .tutorial-number {
+            font-feature-settings: "ss02";
+        }
+
+        .showcase-container {
+            max-width: 1280px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .gradient-text {
+            background: linear-gradient(90deg, #6366f1, #22d3ee);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
+</head>
+<body class="bg-slate-950 text-slate-200">
+    <!-- Top Navigation -->
+    <nav class="border-b border-slate-800 bg-slate-950/80 backdrop-blur-lg sticky top-0 z-50">
+        <div class="max-w-screen-2xl mx-auto">
+            <div class="px-8 py-4 flex items-center justify-between">
+                <div class="flex items-center gap-x-3">
+                    <div class="flex items-center gap-x-2">
+                        <div class="w-9 h-9 rounded-2xl bg-indigo-600 flex items-center justify-center">
+                            <i class="fa-solid fa-link text-white text-xl"></i>
+                        </div>
+                        <div>
+                            <span class="font-display text-2xl font-semibold tracking-tighter">LangChain</span>
+                            <span class="font-display text-2xl font-semibold tracking-tighter text-indigo-400">Harness</span>
+                        </div>
+                    </div>
+                    <div class="px-3 py-1 text-xs font-medium bg-slate-900 border border-slate-800 rounded-full flex items-center gap-x-1.5">
+                        <div class="w-2 h-2 bg-emerald-400 rounded-full animate-pulse"></div>
+                        <span class="text-emerald-400 text-xs font-semibold">v1.0 • 2026</span>
+                    </div>
+                </div>
+
+                <div class="flex items-center gap-x-3">
+                    <a href="https://github.com/cobusgreyling/langchain-showcase" 
+                       target="_blank"
+                       class="flex items-center gap-x-2 px-4 py-2 text-sm font-medium rounded-3xl border border-slate-700 hover:bg-slate-900 transition-colors">
+                        <i class="fa-brands fa-github"></i>
+                        <span class="hidden sm:inline">View on GitHub</span>
+                    </a>
+                    
+                    <button onclick="copyCloneCommand()"
+                            class="flex items-center gap-x-2 px-5 py-2 text-sm font-semibold bg-white text-slate-900 rounded-3xl hover:bg-slate-100 active:scale-[0.985] transition-all">
+                        <i class="fa-solid fa-clone"></i>
+                        <span class="font-medium">Clone Repo</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="relative overflow-hidden">
+        <div class="hero-bg">
+            <img src="assets/banner.jpg" 
+                 alt="LangChain Agent Harness Engineering Showcase banner"
+                 class="w-full h-[420px] object-cover opacity-60 mix-blend-luminosity">
+            
+            <div class="absolute inset-0 bg-gradient-to-b from-slate-950/60 via-slate-950/70 to-slate-950"></div>
+            
+            <div class="absolute inset-0 flex items-center">
+                <div class="max-w-screen-2xl mx-auto px-8 w-full">
+                    <div class="max-w-3xl">
+                        <div class="inline-flex items-center gap-x-2 px-4 py-1 rounded-full bg-white/10 backdrop-blur border border-white/20 mb-6">
+                            <span class="text-xs uppercase tracking-[1.5px] font-semibold text-white/90">By Cobus Greyling</span>
+                        </div>
+                        
+                        <h1 class="font-display text-6xl md:text-7xl font-bold tracking-tighter leading-none mb-4">
+                            Master AI Agent<br>
+                            <span class="gradient-text">Harness Engineering</span>
+                        </h1>
+                        
+                        <p class="max-w-md text-xl text-slate-300 mb-8">
+                            10 production-grade tutorials that teach you how to build 
+                            reliable, observable, and testable agent systems with LangChain.
+                        </p>
+                        
+                        <div class="flex items-center gap-x-4">
+                            <a href="#tutorials" 
+                               class="inline-flex items-center justify-center gap-x-3 px-8 h-14 bg-indigo-600 hover:bg-indigo-500 transition-colors rounded-3xl font-semibold text-lg">
+                                <span>Browse the 10 Tutorials</span>
+                                <i class="fa-solid fa-arrow-down"></i>
+                            </a>
+                            
+                            <a href="https://github.com/cobusgreyling/langchain-showcase/blob/main/README.md" 
+                               target="_blank"
+                               class="inline-flex items-center justify-center gap-x-2 px-6 h-14 border border-white/30 hover:bg-white/5 transition-colors rounded-3xl font-medium">
+                                Read the README
+                            </a>
+                        </div>
+                        
+                        <div class="flex items-center gap-x-6 mt-8 text-sm">
+                            <div class="flex items-center -space-x-2">
+                                <div class="w-7 h-7 rounded-full bg-slate-700 border border-slate-600 flex items-center justify-center ring-1 ring-offset-2 ring-offset-slate-950 ring-slate-800">
+                                    <span class="text-[10px] font-bold">CG</span>
+                                </div>
+                            </div>
+                            <div class="text-slate-400">
+                                Sole author • <span class="text-emerald-400 font-medium">No fluff. Pure engineering.</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Stats Bar -->
+    <div class="border-b border-slate-800 bg-slate-900">
+        <div class="max-w-screen-2xl mx-auto px-8 py-5">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                <div class="flex items-center gap-x-4">
+                    <div class="text-4xl font-semibold tabular-nums tracking-tighter">10</div>
+                    <div class="leading-tight">
+                        <div class="font-semibold">Tutorials</div>
+                        <div class="text-xs text-slate-400">Progressive &amp; cumulative</div>
+                    </div>
+                </div>
+                <div class="flex items-center gap-x-4">
+                    <div class="text-4xl font-semibold tabular-nums tracking-tighter">~5h</div>
+                    <div class="leading-tight">
+                        <div class="font-semibold">Total Learning Time</div>
+                        <div class="text-xs text-slate-400">Including exercises</div>
+                    </div>
+                </div>
+                <div class="flex items-center gap-x-4">
+                    <div>
+                        <div class="font-semibold">Harness Engineering</div>
+                        <div class="text-xs text-slate-400">Evaluation • Guardrails • State • Observability</div>
+                    </div>
+                </div>
+                <div class="flex items-center gap-x-3 text-sm">
+                    <div class="px-3 py-1 bg-emerald-900/60 text-emerald-400 rounded-2xl text-xs font-medium flex items-center gap-x-1.5">
+                        <i class="fa-solid fa-check"></i>
+                        <span>Production patterns</span>
+                    </div>
+                    <div class="text-slate-400 text-xs">Ready to ship</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Why This Showcase -->
+    <div class="max-w-screen-2xl mx-auto px-8 pt-14 pb-8">
+        <div class="max-w-3xl">
+            <h2 class="section-header mb-3">Why most agent tutorials fail you</h2>
+            <p class="text-lg text-slate-300">
+                Most LangChain content stops at “here’s a working agent.” This showcase is different. 
+                It teaches you how to build agents you can actually trust in production.
+            </p>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-4 mt-8">
+            <div class="bg-slate-900 border border-slate-800 rounded-3xl p-6">
+                <div class="text-indigo-400 mb-2"><i class="fa-solid fa-shield-halved text-xl"></i></div>
+                <div class="font-semibold mb-1">Contracts over prompts</div>
+                <div class="text-sm text-slate-400">Structured output, explicit schemas, and validation as first-class citizens.</div>
+            </div>
+            <div class="bg-slate-900 border border-slate-800 rounded-3xl p-6">
+                <div class="text-indigo-400 mb-2"><i class="fa-solid fa-chart-line text-xl"></i></div>
+                <div class="font-semibold mb-1">Evaluation is infrastructure</div>
+                <div class="text-sm text-slate-400">You cannot improve what you cannot measure. Tutorial 07 is mandatory.</div>
+            </div>
+            <div class="bg-slate-900 border border-slate-800 rounded-3xl p-6">
+                <div class="text-indigo-400 mb-2"><i class="fa-solid fa-sync text-xl"></i></div>
+                <div class="font-semibold mb-1">Resilience is engineered</div>
+                <div class="text-sm text-slate-400">Guardrails, retries, budgets, and graceful failure — not afterthoughts.</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tutorials Section -->
+    <div id="tutorials" class="max-w-screen-2xl mx-auto px-8 pt-6 pb-16">
+        <div class="flex flex-col md:flex-row md:items-end justify-between mb-6 gap-y-3">
+            <div>
+                <h2 class="section-header">The 10 Tutorials</h2>
+                <p class="text-slate-400 mt-1">Ordered for maximum learning. Do them sequentially.</p>
+            </div>
+            
+            <!-- Filters -->
+            <div class="flex flex-wrap items-center gap-2">
+                <!-- Search -->
+                <div class="relative w-64">
+                    <input type="text" id="search-input" 
+                           onkeyup="filterTutorials()"
+                           placeholder="Search tutorials..." 
+                           class="w-full bg-slate-900 border border-slate-700 focus:border-indigo-500 transition-colors rounded-3xl pl-10 pr-4 py-2.5 text-sm placeholder:text-slate-500 outline-none">
+                    <i class="fa-solid fa-search absolute left-4 top-3 text-slate-500"></i>
+                </div>
+                
+                <!-- Difficulty filters -->
+                <div class="flex rounded-3xl border border-slate-700 p-1 bg-slate-900">
+                    <button onclick="filterByDifficulty('all')" id="filter-all"
+                            class="filter-btn active px-4 py-1 text-sm font-medium rounded-[20px]">All</button>
+                    <button onclick="filterByDifficulty('Beginner')" id="filter-Beginner"
+                            class="filter-btn px-4 py-1 text-sm font-medium rounded-[20px]">Beginner</button>
+                    <button onclick="filterByDifficulty('Intermediate')" id="filter-Intermediate"
+                            class="filter-btn px-4 py-1 text-sm font-medium rounded-[20px]">Intermediate</button>
+                    <button onclick="filterByDifficulty('Advanced')" id="filter-Advanced"
+                            class="filter-btn px-4 py-1 text-sm font-medium rounded-[20px]">Advanced</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tutorial Grid -->
+        <div id="tutorial-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+            <!-- Populated by JavaScript -->
+        </div>
+        
+        <div class="mt-6 text-xs text-slate-500 flex items-center gap-x-2">
+            <i class="fa-solid fa-info-circle"></i>
+            <span>Each tutorial includes runnable code, exercises, and “Harness Engineering Takeaways”.</span>
+        </div>
+    </div>
+
+    <!-- Learning Path -->
+    <div class="bg-slate-900 border-t border-b border-slate-800 py-12">
+        <div class="max-w-screen-2xl mx-auto px-8">
+            <div class="max-w-2xl">
+                <h2 class="font-display text-3xl font-semibold tracking-tight mb-4">Recommended learning path</h2>
+                <div class="text-slate-300 space-y-3 text-[15px]">
+                    <div><strong>Fast track:</strong> 01 (skim) → 02 → 03 → 04 → <span class="font-semibold text-emerald-400">07 (critical)</span> → 10</div>
+                    <div><strong>Deep track:</strong> Complete all tutorials in order + do the exercises in each README.</div>
+                    <div><strong>Team use:</strong> Treat Tutorial 07 as the forcing function. No agent change merges without passing evals.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer / Final CTA -->
+    <div class="max-w-screen-2xl mx-auto px-8 py-14">
+        <div class="rounded-3xl border border-slate-800 bg-slate-900 px-8 py-8 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
+            <div>
+                <div class="font-semibold text-lg">Ready to build agents you can trust?</div>
+                <div class="text-slate-400">Start with Tutorial 01 or jump straight to the evaluation harness (Tutorial 07).</div>
+            </div>
+            
+            <div class="flex flex-wrap gap-3">
+                <a href="https://github.com/cobusgreyling/langchain-showcase/blob/main/tutorials/01-foundation-lcel/tutorial.py" 
+                   target="_blank"
+                   class="inline-flex items-center gap-x-2 px-6 py-3 font-semibold bg-white text-slate-900 rounded-3xl hover:bg-slate-100 text-sm transition-colors">
+                    <i class="fa-solid fa-play"></i>
+                    <span>Start Tutorial 01</span>
+                </a>
+                
+                <a href="https://github.com/cobusgreyling/langchain-showcase/blob/main/tutorials/07-evaluation-harness/tutorial.py"
+                   target="_blank"
+                   class="inline-flex items-center gap-x-2 px-6 py-3 font-semibold border border-slate-600 hover:bg-slate-800 rounded-3xl text-sm transition-colors">
+                    <span>Go to Evaluation Harness</span>
+                </a>
+            </div>
+        </div>
+        
+        <div class="mt-8 text-center text-xs text-slate-500">
+            Created and maintained by <a href="https://github.com/cobusgreyling" class="underline hover:text-slate-300">Cobus Greyling</a> — sole author. 
+            This is a personal educational showcase focused on real-world agent engineering.
+            <br>
+            <a href="https://github.com/cobusgreyling/langchain-showcase/blob/main/README.md" target="_blank" class="hover:text-slate-300 underline">View on GitHub (README)</a> • 
+            <a href="https://github.com/cobusgreyling/langchain-showcase/blob/main/SHOWCASE.md" target="_blank" class="hover:text-slate-300 underline">Markdown version</a>
+        </div>
+    </div>
+
+    <script>
+        // Tutorial data
+        const tutorials = [
+            {
+                num: "01",
+                title: "Foundation: LCEL & Prompt Composition",
+                slug: "01-foundation-lcel",
+                time: "15 min",
+                difficulty: "Beginner",
+                focus: "Chains, runnables, composition",
+                concept: "Composable pipelines as the base harness",
+                description: "Master LangChain Expression Language as the fundamental building block for all reliable systems.",
+                link: "https://github.com/cobusgreyling/langchain-showcase/blob/main/tutorials/01-foundation-lcel/tutorial.py"
+            },
+            {
+                num: "02",
+                title: "Structured Outputs & Validation",
+                slug: "02-structured-outputs",
+                time: "20 min",
+                difficulty: "Beginner",
+                focus: "Pydantic, with_structured_output",
+                concept: "Contracts & schema enforcement",
+                description: "Force the model to return validated data structures instead of free text. The biggest reliability lever available.",
+                link: "https://github.com/cobusgreyling/langchain-showcase/blob/main/tutorials/02-structured-outputs/tutorial.py"
+            },
+            {
+                num: "03",
+                title: "Tool Calling Mastery",
+                slug: "03-tool-calling",
+                time: "25 min",
+                difficulty: "Intermediate",
+                focus: "@tool, binding, manual loops",
+                concept: "Reliable tool interfaces",
+                description: "Design high-quality tools and understand the manual tool-calling loop before trusting abstractions.",
+                link: "https://github.com/cobusgreyling/langchain-showcase/blob/main/tutorials/03-tool-calling/tutorial.py"
+            },
+            {
+                num: "04",
+                title: "ReAct Agents with LangGraph",
+                slug: "04-react-agent",
+                time: "30 min",
+                difficulty: "Intermediate",
+                focus: "Agent loop, reasoning + acting",
+                concept: "The core agent harness",
+                description: "Build real ReAct agents with full visibility into state, trajectories, and the underlying graph.",
+                link: "https://github.com/cobusgreyling/langchain-showcase/blob/main/tutorials/04-react-agent/tutorial.py"
+            },
+            {
+                num: "05",
+                title: "RAG from First Principles",
+                slug: "05-rag-basics",
+                time: "35 min",
+                difficulty: "Intermediate",
+                focus: "Retrieval, chunking, grounding",
+                concept: "Grounded generation harness",
+                description: "Build a complete retrieval pipeline with proper chunking, metadata, citations, and groundedness checks.",
+                link: "https://github.com/cobusgreyling/langchain-showcase/blob/main/tutorials/05-rag-basics/tutorial.py"
+            },
+            {
+                num: "06",
+                title: "Stateful Agents & Memory",
+                slug: "06-memory-state",
+                time: "25 min",
+                difficulty: "Intermediate",
+                focus: "Checkpointers, thread state",
+                concept: "Long-running conversational state",
+                description: "Add proper short-term memory using LangGraph checkpointers. Understand thread isolation and history management.",
+                link: "https://github.com/cobusgreyling/langchain-showcase/blob/main/tutorials/06-memory-state/tutorial.py"
+            },
+            {
+                num: "07",
+                title: "Building an Evaluation Harness",
+                slug: "07-evaluation-harness",
+                time: "40 min",
+                difficulty: "Advanced",
+                focus: "Test cases, scoring, reporting",
+                concept: "The single most important harness",
+                description: "Create a reusable evaluation system with golden datasets, multiple scorers, and regression detection.",
+                link: "https://github.com/cobusgreyling/langchain-showcase/blob/main/tutorials/07-evaluation-harness/tutorial.py"
+            },
+            {
+                num: "08",
+                title: "Orchestration & Tool Routing",
+                slug: "08-orchestration",
+                time: "30 min",
+                difficulty: "Intermediate",
+                focus: "Multi-tool, routing, parallelism",
+                concept: "Composing capabilities safely",
+                description: "Learn when and how to use explicit routers and supervisors instead of dumping every tool on the agent.",
+                link: "https://github.com/cobusgreyling/langchain-showcase/blob/main/tutorials/08-orchestration/tutorial.py"
+            },
+            {
+                num: "09",
+                title: "Guardrails & Resilience Patterns",
+                slug: "09-guardrails-resilience",
+                time: "35 min",
+                difficulty: "Advanced",
+                focus: "Input/output guards, retries",
+                concept: "Defensive engineering",
+                description: "Implement input and output guardrails as code, smart retries, token budgets, and safe failure modes.",
+                link: "https://github.com/cobusgreyling/langchain-showcase/blob/main/tutorials/09-guardrails-resilience/tutorial.py"
+            },
+            {
+                num: "10",
+                title: "The Complete Production Harness",
+                slug: "10-full-harness",
+                time: "45 min",
+                difficulty: "Advanced",
+                focus: "Everything integrated",
+                concept: "Your reusable agent platform",
+                description: "Assemble everything into a configurable, observable AgentHarness class you can actually use in real projects.",
+                link: "https://github.com/cobusgreyling/langchain-showcase/blob/main/tutorials/10-full-harness/tutorial.py"
+            }
+        ]
+
+        // Render tutorials
+        function renderTutorials(filteredTutorials) {
+            const grid = document.getElementById('tutorial-grid')
+            grid.innerHTML = ''
+            
+            const data = filteredTutorials || tutorials
+            
+            data.forEach(t => {
+                const card = document.createElement('div')
+                card.className = `tutorial-card group bg-slate-900 border border-slate-800 hover:border-slate-700 rounded-3xl p-5 flex flex-col h-full`
+                card.dataset.difficulty = t.difficulty
+                card.dataset.title = t.title.toLowerCase()
+                card.dataset.focus = t.focus.toLowerCase()
+                
+                const difficultyColor = t.difficulty === 'Beginner' ? 'emerald' : 
+                                       t.difficulty === 'Intermediate' ? 'amber' : 'rose'
+                
+                card.innerHTML = `
+                    <div class="flex items-start justify-between mb-3">
+                        <div class="flex items-center gap-x-3">
+                            <div class="tutorial-number w-8 h-8 flex items-center justify-center bg-slate-800 text-slate-400 group-hover:bg-indigo-600 group-hover:text-white transition-colors font-mono font-semibold rounded-2xl text-sm">
+                                ${t.num}
+                            </div>
+                            <div>
+                                <div class="font-semibold leading-tight pr-2">${t.title}</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-center gap-x-2 mb-3">
+                        <div class="inline-flex items-center px-2.5 py-px rounded-2xl text-xs font-medium bg-slate-800 text-slate-300">
+                            <i class="fa-regular fa-clock mr-1.5"></i>
+                            <span>${t.time}</span>
+                        </div>
+                        
+                        <div class="inline-flex items-center px-2.5 py-px rounded-2xl text-xs font-semibold bg-${difficultyColor}-900 text-${difficultyColor}-400">
+                            ${t.difficulty}
+                        </div>
+                    </div>
+                    
+                    <div class="text-sm text-slate-300 mb-4 flex-1">
+                        ${t.description}
+                    </div>
+                    
+                    <div class="mb-4">
+                        <div class="text-[10px] uppercase tracking-wider text-slate-500 mb-1">Key Harness Concept</div>
+                        <div class="text-sm font-medium text-indigo-300">${t.concept}</div>
+                    </div>
+                    
+                    <div class="pt-3 border-t border-slate-800 flex items-center justify-between mt-auto">
+                        <a href="${t.link}" 
+                           class="inline-flex items-center gap-x-2 text-sm font-semibold text-white group-hover:text-indigo-400 transition-colors">
+                            <span>Open tutorial</span>
+                            <i class="fa-solid fa-arrow-right text-xs"></i>
+                        </a>
+                        
+                        <a href="https://github.com/cobusgreyling/langchain-showcase/blob/main/tutorials/${t.slug}/README.md" 
+                           target="_blank"
+                           class="text-xs text-slate-400 hover:text-slate-200 transition-colors flex items-center gap-x-1">
+                            <span>Notes</span>
+                            <i class="fa-solid fa-file-lines"></i>
+                        </a>
+                    </div>
+                `
+                grid.appendChild(card)
+            })
+        }
+
+        // Filter functions
+        let currentDifficulty = 'all'
+        
+        function filterTutorials() {
+            const searchTerm = document.getElementById('search-input').value.toLowerCase().trim()
+            const grid = document.getElementById('tutorial-grid')
+            const cards = grid.querySelectorAll('.tutorial-card')
+            
+            cards.forEach(card => {
+                const title = card.dataset.title || ''
+                const focus = card.dataset.focus || ''
+                const matchesSearch = !searchTerm || title.includes(searchTerm) || focus.includes(searchTerm)
+                
+                const difficulty = card.dataset.difficulty
+                const matchesDifficulty = currentDifficulty === 'all' || difficulty === currentDifficulty
+                
+                if (matchesSearch && matchesDifficulty) {
+                    card.style.display = ''
+                } else {
+                    card.style.display = 'none'
+                }
+            })
+        }
+        
+        function filterByDifficulty(difficulty) {
+            currentDifficulty = difficulty
+            
+            // Update active button styles
+            document.querySelectorAll('[id^="filter-"]').forEach(btn => {
+                btn.classList.remove('active', 'bg-indigo-600', 'text-white', 'border-indigo-600')
+                btn.classList.add('text-slate-300')
+            })
+            
+            const activeBtn = document.getElementById(`filter-${difficulty}`)
+            if (activeBtn) {
+                activeBtn.classList.add('active', 'bg-indigo-600', 'text-white', 'border-indigo-600')
+                activeBtn.classList.remove('text-slate-300')
+            } else {
+                // "all" button
+                document.getElementById('filter-all').classList.add('active', 'bg-indigo-600', 'text-white')
+            }
+            
+            filterTutorials()
+        }
+        
+        function filterByDifficultyInit() {
+            // Set initial active state for "All"
+            const allBtn = document.getElementById('filter-all')
+            if (allBtn) {
+                allBtn.classList.add('active', 'bg-indigo-600', 'text-white')
+            }
+        }
+
+        // Copy clone command
+        function copyCloneCommand() {
+            const command = 'git clone https://github.com/cobusgreyling/langchain-showcase.git'
+            navigator.clipboard.writeText(command).then(() => {
+                const originalText = event.currentTarget ? event.currentTarget.innerHTML : ''
+                
+                // Show toast
+                const toast = document.createElement('div')
+                toast.className = `fixed bottom-6 left-1/2 -translate-x-1/2 bg-emerald-600 text-white px-5 py-3 rounded-3xl shadow-xl flex items-center gap-x-2 text-sm font-medium z-[100]`
+                toast.innerHTML = `
+                    <i class="fa-solid fa-check"></i>
+                    <span>Clone command copied to clipboard</span>
+                `
+                document.body.appendChild(toast)
+                
+                setTimeout(() => {
+                    toast.style.transition = 'all 0.2s'
+                    toast.style.opacity = '0'
+                    setTimeout(() => toast.remove(), 150)
+                }, 2200)
+            }).catch(() => {
+                // Fallback
+                prompt('Copy this command:', command)
+            })
+        }
+
+        // Keyboard shortcut hint
+        function setupKeyboardShortcuts() {
+            document.addEventListener('keydown', function(e) {
+                if (e.key === '/' && document.activeElement.tagName === 'BODY') {
+                    e.preventDefault()
+                    document.getElementById('search-input').focus()
+                }
+            })
+            
+            // Add hint
+            const search = document.getElementById('search-input')
+            search.setAttribute('placeholder', 'Search tutorials... (press / to focus)')
+        }
+
+        // Initialize everything
+        function init() {
+            renderTutorials()
+            filterByDifficultyInit()
+            setupKeyboardShortcuts()
+            
+            // Make sure "All" filter works
+            const allBtn = document.getElementById('filter-all')
+            if (allBtn) {
+                allBtn.onclick = () => filterByDifficulty('all')
+            }
+            
+            // Bonus: random tip in console for developers
+            console.log('%c[LangChain Showcase] Tip: Press "/" to focus the search bar. All tutorials are fully self-contained.', 'color:#64748b')
+        }
+        
+        // Boot
+        window.onload = init
+    </script>
+</body>
+</html>
