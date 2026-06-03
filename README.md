@@ -1,5 +1,9 @@
 # LangChain Agent & Harness Engineering Showcase
 
+<p align="center">
+  <img src="assets/header.jpg" width="100%" alt="LangChain Agent & Harness Engineering Showcase Header">
+</p>
+
 > **10 progressive, production-minded tutorials** for developers who want to move beyond toy demos and learn how to **engineer reliable AI agent systems**.
 
 **Created and maintained by [Cobus Greyling](https://github.com/cobusgreyling)** — sole author. No other contributors.
