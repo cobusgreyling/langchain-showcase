@@ -66,13 +66,27 @@ Each tutorial is self-documenting. Read the comments and the per-tutorial notes.
 | 09 | [Guardrails & Resilience Patterns](./tutorials/09-guardrails-resilience) | Input/output guards, retries     | Defensive engineering                | 35 min   |
 | 10 | [The Complete Production Harness](./tutorials/10-full-harness)           | Everything integrated            | Your reusable agent platform         | 45 min   |
 
-> **Live hosted showcase:** [https://cobusgreyling.github.io/langchain-showcase/](https://cobusgreyling.github.io/langchain-showcase/) (enable Pages in repo settings if you see 404)
+> **Live hosted showcase:** [https://cobusgreyling.github.io/langchain-showcase/](https://cobusgreyling.github.io/langchain-showcase/)
 
-Local alternative: [docs/index.html](docs/index.html) or [docs/showcase.html](docs/showcase.html)
+**If you see a 404**, you need to enable GitHub Pages (one-time setup):
+
+### How to enable the live site (exact steps)
+
+1. Go to your repo → **Settings** → **Pages** (direct link: https://github.com/cobusgreyling/langchain-showcase/settings/pages)
+2. Under **"Build and deployment"**, find **Source**.
+3. Change it from "None" (or whatever it says) to **GitHub Actions**.
+4. Save the change.
+5. GitHub will automatically run the deployment workflow we added (see the green checkmarks in the **Actions** tab).
+6. Wait 1–2 minutes and refresh the URL above.
+
+Once enabled, every push to `main` will automatically update the live site.
+
+Local alternative (works immediately after cloning):  
+[docs/index.html](docs/index.html) or [docs/showcase.html](docs/showcase.html)
 
 **Full visual overview, learning objectives, and key takeaways for every tutorial:**
 
-**[→ Open the live Showcase Page](https://cobusgreyling.github.io/langchain-showcase/)** (recommended)
+**[→ Open the live Showcase Page](https://cobusgreyling.github.io/langchain-showcase/)** (recommended once enabled)
 
 Local file: [docs/index.html](docs/index.html) (or [docs/showcase.html](docs/showcase.html))
 
