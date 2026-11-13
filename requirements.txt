@@ -1,27 +1,30 @@
+# LangChain 1.5 LTS line, November 2026.
+# Requires Python 3.11 or newer (langchain 1.5 and langchain-core 1.8).
+
 # Core LangChain + Graph (required for all tutorials)
-langchain>=0.3.0
-langchain-core>=0.3.0
-langgraph>=0.2.0
+langchain>=1.5.0,<2
+langchain-core>=1.8.0,<2
+langgraph>=1.2.21,<2
 
 # LLM providers (install what you need)
-langchain-openai>=0.2.0
-# langchain-anthropic>=0.2.0
+langchain-openai>=1.7.4,<2
+# langchain-anthropic>=1.0.0
 # langchain-google-genai>=2.0.0
-# langchain-ollama>=0.2.0
+# langchain-ollama>=0.3.0
 
 # Structured data & validation
-pydantic>=2.0.0
+pydantic>=2.10.0,<3
 
 # Environment & utilities
 python-dotenv>=1.0.0
 
 # RAG (Tutorial 05)
-langchain-text-splitters>=0.3.0
-langchain-chroma>=0.1.0
-chromadb>=0.5.0
+langchain-text-splitters>=1.1.3,<2
+langchain-chroma>=1.1.0,<2
+chromadb>=1.5.0,<2
 
 # Optional but recommended for evaluation & tracing (Tutorial 07+)
-# langsmith>=0.1.0
+# langsmith>=0.14.0
 
 # For nice console output in tutorials
 rich>=13.0.0

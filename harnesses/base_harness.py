@@ -17,8 +17,8 @@ from dataclasses import dataclass, field, asdict
 from datetime import datetime
 from typing import Any, Callable, Dict, List, Optional
 
+from langchain.agents import create_agent
 from langchain_openai import ChatOpenAI
-from langgraph.prebuilt import create_react_agent
 from langgraph.checkpoint.memory import InMemorySaver
 
 
@@ -90,10 +90,10 @@ class AgentHarness:
         self.llm = ChatOpenAI(model=config.model_name, temperature=config.temperature)
         self.checkpointer = InMemorySaver()
 
-        self.agent = create_react_agent(
+        self.agent = create_agent(
             model=self.llm,
             tools=tools,
-            prompt=config.system_prompt,
+            system_prompt=config.system_prompt,
             checkpointer=self.checkpointer,
         )
 

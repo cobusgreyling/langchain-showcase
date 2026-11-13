@@ -4,7 +4,7 @@
 
 ## Learning Objectives
 
-- Use `create_react_agent` (or the newer `create_agent`) to get a production-grade ReAct loop with minimal code.
+- Use `create_agent` to get a production-grade ReAct loop with minimal code.
 - Inspect the agent's internal state and message history after runs.
 - Understand the graph structure so you can customize it later.
 - Add simple guardrails and observe the agent's trajectory.

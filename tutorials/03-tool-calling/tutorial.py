@@ -118,7 +118,7 @@ for t in tools:
 # =============================================================================
 # MANUAL TOOL CALLING LOOP — THE HEART OF AGENT ENGINEERING
 # =============================================================================
-# This is what create_react_agent and create_agent do under the hood.
+# This is what create_agent does under the hood.
 # Understanding this loop lets you customize, debug, and improve agents.
 
 
@@ -233,7 +233,7 @@ print("""
 5. Parallel tool calling (multiple items in tool_calls) is powerful but
    requires careful result association via tool_call_id. Never assume order.
 
-6. Before you use create_react_agent or create_agent, you should be able
+6. Before you use create_agent, you should be able
    to write a loop like the one above. The abstractions are convenience,
    not magic.
 

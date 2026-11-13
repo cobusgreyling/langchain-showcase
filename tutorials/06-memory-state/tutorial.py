@@ -19,9 +19,9 @@ from typing import Annotated
 
 load_dotenv()
 
+from langchain.agents import create_agent
 from langchain_openai import ChatOpenAI
 from langchain_core.tools import tool
-from langgraph.prebuilt import create_react_agent
 from langgraph.checkpoint.memory import InMemorySaver
 
 llm = ChatOpenAI(model="gpt-4o-mini", temperature=0.1)
@@ -75,10 +75,10 @@ Rules:
 - Be concise. Reference previous context naturally when relevant.
 """
 
-agent = create_react_agent(
+agent = create_agent(
     model=llm,
     tools=tools,
-    prompt=SYSTEM,
+    system_prompt=SYSTEM,
     checkpointer=checkpointer,
 )
 

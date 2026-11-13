@@ -7,11 +7,8 @@ Author: Cobus Greyling
 We now hand the loop management to LangGraph while keeping full visibility.
 This is the pattern used in the vast majority of serious LangChain agent work.
 
-Two APIs are shown in comments:
-- The classic and extremely widely used: langgraph.prebuilt.create_react_agent
-- The newer (2025/2026): langchain.agents.create_agent (with middleware)
-
-We use the prebuilt in the main code for maximum compatibility and documentation.
+The agent is built with langchain.agents.create_agent (LangChain 1.5).
+It runs on LangGraph and is the supported way to get a ReAct loop.
 
 Run:
     python tutorial.py
@@ -22,10 +19,9 @@ from typing import Annotated
 
 load_dotenv()
 
+from langchain.agents import create_agent
 from langchain_openai import ChatOpenAI
 from langchain_core.tools import tool
-from langgraph.prebuilt import create_react_agent
-from langgraph.checkpoint.memory import InMemorySaver   # We'll use this properly in Tutorial 06
 
 llm = ChatOpenAI(model="gpt-4o-mini", temperature=0.2)
 
@@ -115,14 +111,14 @@ Core rules:
 # - Proper state (messages)
 # - Built-in handling of tool call → execution → observation
 
-agent = create_react_agent(
+agent = create_agent(
     model=llm,
     tools=tools,
-    prompt=SYSTEM_PROMPT,           # In newer LangGraph this is often "prompt"
+    system_prompt=SYSTEM_PROMPT,
     # checkpointer=...              # Added in Tutorial 06
 )
 
-print("Agent created with create_react_agent (LangGraph prebuilt).")
+print("Agent created with langchain.agents.create_agent.")
 print(f"Tools: {[t.name for t in tools]}\n")
 
 # =============================================================================
@@ -203,7 +199,7 @@ print("\n" + "=" * 60)
 print("HARNESS ENGINEERING TAKEAWAYS — Tutorial 04")
 print("=" * 60)
 print("""
-1. create_react_agent gives you a complete, debuggable ReAct loop in one call.
+1. create_agent gives you a complete, debuggable ReAct loop in one call.
    The real power comes from what you do *around* it (prompts, tools, state, evals).
 
 2. The entire conversation, including every tool call and observation, lives

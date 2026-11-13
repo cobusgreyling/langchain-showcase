@@ -25,9 +25,9 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
+from langchain.agents import create_agent
 from langchain_openai import ChatOpenAI
 from langchain_core.tools import tool
-from langgraph.prebuilt import create_react_agent
 
 print("=== Tutorial 07: Building an Evaluation Harness ===\n")
 
@@ -73,10 +73,10 @@ def calculate(expr: str) -> str:
         return "ERROR"
 
 
-agent = create_react_agent(
+agent = create_agent(
     model=llm,
     tools=[search_kb, web_search, calculate],
-    prompt="You are a precise assistant. Use tools when needed. Be concise and cite sources.",
+    system_prompt="You are a precise assistant. Use tools when needed. Be concise and cite sources.",
 )
 
 # =============================================================================

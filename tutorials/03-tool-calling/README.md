@@ -45,7 +45,7 @@ python tutorial.py
 - The docstring + argument annotations of a tool become part of the model's system prompt. Write them like you are writing an API spec for a junior developer.
 - Always return useful, structured error information from tools instead of letting exceptions bubble up.
 - Separate "the model wants to call X with args Y" from "X succeeded with result Z". Many bugs live in the gap.
-- Manual loops are the best way to learn. Only reach for `create_react_agent` after you can write the loop yourself.
+- Manual loops are the best way to learn. Only reach for `create_agent` after you can write the loop yourself.
 - Tool schemas are versioned interfaces. Changing a tool signature is a breaking change for the agent.
 
 ## Common Pitfalls

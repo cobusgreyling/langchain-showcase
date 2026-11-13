@@ -103,7 +103,7 @@ The tutorials are deliberately ordered. Skipping ahead will cost you later.
 - The importance of clear tool names and descriptions for the ReAct reasoning trace.
 - When to use the prebuilt agent vs building your own graph.
 
-**Key concepts:** `create_react_agent`, `StateGraph`, messages state, `graph.get_state()`, interrupts (preview).
+**Key concepts:** `create_agent`, `StateGraph`, messages state, `graph.get_state()`, interrupts (preview).
 
 **Teaser takeaway:** The ReAct loop is the beating heart of most reliable agents. Master it before you invent new patterns.
 
@@ -237,7 +237,7 @@ The tutorials are deliberately ordered. Skipping ahead will cost you later.
 
 **Key concepts:** Context manager or builder pattern, pluggable components, structured run metadata, cheap "shadow" evals, deployment considerations (what actually matters when you go to prod).
 
-**Teaser takeaway:** By the end you will have a personal/agent-platform skeleton you can copy into real projects instead of starting from `create_react_agent` every time.
+**Teaser takeaway:** By the end you will have a personal/agent-platform skeleton you can copy into real projects instead of starting from `create_agent` every time.
 
 [Open tutorial →](./tutorials/10-full-harness/tutorial.py)
 

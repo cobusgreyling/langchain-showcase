@@ -23,9 +23,9 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
+from langchain.agents import create_agent
 from langchain_openai import ChatOpenAI
 from langchain_core.tools import tool
-from langgraph.prebuilt import create_react_agent
 from langgraph.checkpoint.memory import InMemorySaver
 
 print("=== Tutorial 10: The Complete Production Harness ===\n")
@@ -112,10 +112,10 @@ class AgentHarness:
 
         self.checkpointer = InMemorySaver()
 
-        self.agent = create_react_agent(
+        self.agent = create_agent(
             model=self.llm,
             tools=tools,
-            prompt=config.system_prompt,
+            system_prompt=config.system_prompt,
             checkpointer=self.checkpointer,
         )
 

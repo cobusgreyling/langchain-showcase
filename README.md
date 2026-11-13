@@ -30,11 +30,13 @@ If you want to go from "I can make an agent say hello" to "I can ship an agent t
 
 ## Quick Start
 
+Requires **Python 3.11+**. Pinned to the LangChain 1.5 LTS line (November 2026): `langchain` 1.5, `langchain-core` 1.8, `langgraph` 1.2. Agents are built with `langchain.agents.create_agent`.
+
 ```bash
 git clone https://github.com/cobusgreyling/langchain-showcase.git
 cd langchain-showcase
 
-# Create virtual environment
+# Create virtual environment (Python 3.11 or newer)
 python -m venv .venv
 source .venv/bin/activate   # Windows: .venv\Scripts\activate
 
